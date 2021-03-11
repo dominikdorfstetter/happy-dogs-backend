@@ -1,7 +1,11 @@
-import { Column, Entity } from 'typeorm';
+import {Column, Entity, JoinColumn, OneToOne} from 'typeorm';
 import { BaseEntity } from '@app/base/base.entity';
 import { AddressDetails } from '@app/api/contacts/entities/adress-details.entity';
 
+/**
+ * @author: Dominik Dorfstetter
+ * Contact entity
+ */
 @Entity()
 export class ContactEntity extends BaseEntity {
     @Column({
@@ -15,11 +19,17 @@ export class ContactEntity extends BaseEntity {
     public phone: string;
 
     @Column({
+      name: 'WEBSITE',
+    })
+    public website: string;
+
+    @Column({
       name: 'EMAIL',
     })
     public email: string;
 
-
+    @OneToOne(() => AddressDetails)
+    @JoinColumn()
     public address: AddressDetails;
 
 }

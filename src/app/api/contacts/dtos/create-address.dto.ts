@@ -1,6 +1,9 @@
 import { IsAlphanumeric, IsISO31661Alpha2, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-
+/**
+ * @author: Dominik Dorfstetter
+ * DTO to create a new address
+ */
 export class CreateAddressDto {
 
     @IsNotEmpty()

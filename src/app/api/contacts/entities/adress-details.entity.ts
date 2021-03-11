@@ -1,6 +1,13 @@
-import { Column } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '@app/base/base.entity';
 
-export class AddressDetails {
+
+/**
+ * @author: Dominik Dorfstetter
+ * AddressDetails entity
+ */
+@Entity()
+export class AddressDetails extends BaseEntity {
     @Column({
       name: 'ZIPCODE',
     })
