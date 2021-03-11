@@ -7,6 +7,7 @@ import './configs/ts-paths-fix-apply';
 import { AppModule } from '@app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { getServiceConfig, ServiceConfigOptions } from '@configs/serviceconfig';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap(): Promise<void> {
   const serviceOptions: ServiceConfigOptions = getServiceConfig();
@@ -21,6 +22,8 @@ async function bootstrap(): Promise<void> {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup(serviceOptions.apiPath, app, document);
   }
+  // Secures all endpoints globally from receiving incorrect data
+  app.useGlobalPipes(new ValidationPipe())
 
   await app.listen(serviceOptions.port);
 }

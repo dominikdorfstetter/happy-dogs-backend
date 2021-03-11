@@ -7,18 +7,19 @@ export class ContactEntity extends BaseEntity {
     @Column({
       name: 'NAME',
     })
-    public name?: string;
+    public name: string;
 
     @Column({
       name: 'PHONE',
     })
-    public phone?: string;
+    public phone: string;
 
     @Column({
       name: 'EMAIL',
     })
-    public email?: string;
+    public email: string;
 
-    public address?: AddressDetails;
+
+    public address: AddressDetails;
 
 }

@@ -12,9 +12,9 @@ export class AddressDetails {
     public street?: string;
 
     @Column({
-      name: 'NUMBER',
+      name: 'HOUSE_NUMBER',
     })
-    public number?: string;
+    public houseNumber?: string;
 
     @Column({
       name: 'FLOOR',
