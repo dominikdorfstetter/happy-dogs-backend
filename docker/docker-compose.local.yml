@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+  pg-keycloak:
+    build: postgres
+    volumes:
+      - ./data/pgKeycloak:/var/lib/postgresql/data
+    env_file: configs/pg_keycloak.env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+  mailserver:
+    image: mailhog/mailhog
+    restart: on-failure
+    logging:
+      driver: 'none'
+    ports:
+      - 8025:8025 # web UI
+  keycloak:
+    image: "jboss/keycloak:10.0.0"
+    command:
+      [
+          '-b',
+          '0.0.0.0',
+          '-Dkeycloak.migration.action=import',
+          '-Dkeycloak.migration.provider=dir',
+          '-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config',
+          '-Dkeycloak.migration.strategy=OVERWRITE_EXISTING',
+          '-Dkeycloak.profile.feature.upload_scripts=enabled',
+      ]
+    restart: on-failure
+    env_file: configs/keycloak.env
+    volumes:
+      - ./data/keycloak:/opt/jboss/keycloak/realm-config
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/" ]
+      interval: 5s
+      timeout: 2s
+      retries: 15
+    ports:
+      - 9990:8080
+    depends_on:
+      pg-keycloak:
+        condition: service_healthy
+  pg_happydogs:
+    build: postgres
+    env_file: configs/pg_happydogs.env
+    volumes:
+      - ./data/pgHappydogs:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    ports:
+      - 5432:5432
