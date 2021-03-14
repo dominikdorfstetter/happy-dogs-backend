@@ -1,5 +1,5 @@
 import { Entity, PrimaryColumn } from 'typeorm';
-import { AuditEntity } from '@app/base/audit.entity';
+import { AuditEntity } from '@app/api/base/audit.entity';
 
 @Entity()
 export class UserEntity extends AuditEntity {

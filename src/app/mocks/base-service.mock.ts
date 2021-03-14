@@ -1,26 +1,28 @@
-import { BaseEntityService } from '@app/base/base-service.interface';
+import { BaseEntityService } from '@app/api/base/base-service.interface';
 import { Observable, of } from 'rxjs';
 
 export class BaseEntityServiceMock<T> implements BaseEntityService<T> {
 
-  public create(entity: any): Observable<string> {
-    return of('');
+  public create(entity: T): Observable<T> {
+    return of(entity);
   }
 
-  public delete(uuid: string): Observable<number> {
+  public delete(): Observable<number> {
     return of(0);
   }
 
-  public get(uuid: string): Observable<T> {
-    return of({} as T);
+  public findOne(uuid = ''): Observable<T> {
+    return of({
+      uuid
+    } as unknown as T);
   }
 
-  public getAll(): Observable<T[]> {
+  public findAll(): Observable<T[]> {
     return of([] as T[]);
   }
 
-  public update(entity: any): Observable<T> {
-    return of({} as T);
+  public update(entity: T): Observable<T> {
+    return of(entity);
   }
 
 }

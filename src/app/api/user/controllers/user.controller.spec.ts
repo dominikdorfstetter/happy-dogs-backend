@@ -18,14 +18,14 @@ describe('UserController', () => {
   });
 
   it('should return an array of users', () => {
-    jest.spyOn(userServiceMock, 'getAll').mockReturnValueOnce(of(MOCK_USERS));
+    jest.spyOn(userServiceMock, 'findAll').mockReturnValueOnce(of(MOCK_USERS));
     userController.findAll().subscribe((res: UserEntity[]) => {
       expect(res).toEqual(MOCK_USERS);
     });
   });
 
   it('should return a specific user', () => {
-    jest.spyOn(userServiceMock, 'get').mockReturnValueOnce(of(MOCK_USER_1));
+    jest.spyOn(userServiceMock, 'findOne').mockReturnValueOnce(of(MOCK_USER_1));
     userController.findOne({ uuid: MOCK_USER_1.uuid })
         .subscribe((user: UserEntity | undefined) => {
           expect(user).toBe(MOCK_USER_1);
@@ -34,7 +34,7 @@ describe('UserController', () => {
 
   it('should return uuid after deletion of user', () => {
     jest.spyOn(userServiceMock, 'delete').mockReturnValueOnce(of(1));
-    userController.delete(MOCK_USER_1.uuid).subscribe((res: number) => {
+    userController.delete({ uuid: MOCK_USER_1.uuid }).subscribe((res: number) => {
       expect(res).toBe(1);
     });
   });

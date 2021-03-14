@@ -29,6 +29,7 @@ module.exports = {
     'no-console': 'error',
     'no-return-await': 'error',
     'max-params': [1, 5],
+    'quotes': ['error', 'single', { 'allowTemplateLiterals': true } ],
     'max-depth': ['error', 4],
     'max-len': ['error', 120, 2, {
       ignoreUrls: true,

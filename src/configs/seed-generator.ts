@@ -32,7 +32,7 @@ usage('Usage: $0 generate <name>')
 ;
 
 function main(name: string): void {
-  let tplAsString: string = fs.readFileSync(TEMPLATE_PATH).toString('UTF-8');
+  let tplAsString: string = fs.readFileSync(TEMPLATE_PATH).toString('utf8');
 
   const timeStamp = +new Date();
   const templateName = `${ _.camelCase(name) }${ timeStamp }`;

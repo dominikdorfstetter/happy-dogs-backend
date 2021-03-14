@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { BaseEntityService } from '@app/base/base-service.interface';
+import { BaseEntityService } from '@app/api/base/base-service.interface';
 import { from, Observable } from 'rxjs';
 import { UserEntity } from '../entities';
 

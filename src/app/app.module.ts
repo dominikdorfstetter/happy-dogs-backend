@@ -9,7 +9,7 @@ import { getKeycloakConfig } from '@configs/keycloakconfig';
 import { LoggerMiddleware } from '@app/middlewares/logger.middleware';
 import { UserEntity } from '@app/api/user/entities';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppService } from '@app/app.service';
 
 @Module({
   imports: [
@@ -17,8 +17,9 @@ import { AppService } from './app.service';
       ...getDefaultConnection(),
       entities: [UserEntity],
     }),
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    KeycloakConnectModule.register(getKeycloakConfig()),
+    KeycloakConnectModule.register({
+      ...getKeycloakConfig()
+    }),
     UserModule,
   ],
   controllers: [AppController],
@@ -36,9 +37,12 @@ import { AppService } from './app.service';
       provide: APP_GUARD,
       useClass: RoleGuard,
     }],
+
 })
 export class AppModule {
+
   public configure(consumer: MiddlewareConsumer): void {
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
+
 }

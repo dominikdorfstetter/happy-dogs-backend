@@ -1,5 +1,5 @@
 import {Column, Entity, JoinColumn, OneToOne} from 'typeorm';
-import { BaseEntity } from '@app/base/base.entity';
+import { BaseEntity } from '@app/api/base/base.entity';
 import { AddressDetails } from '@app/api/contacts/entities/adress-details.entity';
 
 /**

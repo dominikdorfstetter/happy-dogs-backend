@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Res } from '@nestjs/common';
+import { Controller, Get, HttpCode } from '@nestjs/common';
 import { Unprotected } from 'nest-keycloak-connect';
 import { AppService } from './app.service';
 

@@ -1,9 +1,9 @@
 import {
-    IsEmail,
-    IsNotEmpty, IsObject,
-    IsOptional,
-    IsPhoneNumber,
-    IsString, IsUrl
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsPhoneNumber,
+  IsString, IsUrl
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CreateAddressDto } from '@app/api/contacts/dtos/create-address.dto';
