@@ -16,24 +16,24 @@ const CONTACT_PATH = ':uuid/contact/:contactUuid';
 export class PetController {
 
   constructor(private readonly contactService: ContactService,
-                private readonly petService: PetService) {}
+                private readonly petService: PetService) { }
 
-                @Post()
-                @HttpCode(200)
+  @Post()
+  @HttpCode(200)
   public create(@Body() createPetDto: CreatePetDto): Observable<PetEntity> {
     return this.petService.create(createPetDto);
   }
 
   @Get(':uuid')
   @HttpCode(200)
-                public findOne(@Param() params: { uuid: string }): Observable<PetEntity | undefined> {
-                  return this.petService.findOne(params.uuid);
-                }
+  public findOne(@Param() params: { uuid: string }): Observable<PetEntity | undefined> {
+    return this.petService.findOne(params.uuid);
+  }
 
   @Put(':uuid')
   @HttpCode(200)
   public update(@Param() params: { uuid: string },
-                       @Body() updatePetDto: UpdatePetDto): Observable<UpdateResult> {
+                @Body() updatePetDto: UpdatePetDto): Observable<UpdateResult> {
     return this.petService.update({
       ...updatePetDto,
       uuid: params.uuid
@@ -48,35 +48,33 @@ export class PetController {
   }
 
   // PET-CONTACTS
-
-    @Post(':uuid/contact')
-    @HttpCode(200)
+  @Post(':uuid/contact')
+  @HttpCode(200)
   public createContact(@Body() createContactDto: CreateContactDto): Observable<ContactEntity> {
     return this.contactService.create(createContactDto);
   }
 
-    @Get(CONTACT_PATH)
-    @HttpCode(200)
-    public findContact(
-        @Param() params: { contactUuid: string }): Observable<ContactEntity | undefined> {
-      return this.contactService.findOne(params.contactUuid);
-    }
+  @Get(CONTACT_PATH)
+  @HttpCode(200)
+  public findContact(
+      @Param() params: { contactUuid: string }): Observable<ContactEntity | undefined> {
+    return this.contactService.findOne(params.contactUuid);
+  }
 
-    @Put(CONTACT_PATH)
-    @HttpCode(200)
-    public updateContact(@Param() params: { contactUuid: string },
-                         @Body() updateContactsDto: UpdateContactDto): Observable<UpdateResult> {
-      return this.contactService.update({
-        ...updateContactsDto,
-        uuid: params.contactUuid
-      });
-    }
+  @Put(CONTACT_PATH)
+  @HttpCode(200)
+  public updateContact(@Param() params: { contactUuid: string },
+                       @Body() updateContactsDto: UpdateContactDto): Observable<UpdateResult> {
+    return this.contactService.update({
+      ...updateContactsDto,
+      uuid: params.contactUuid
+    });
+  }
 
-    @Delete(CONTACT_PATH)
-    @HttpCode(200)
-    public deleteContact(
-        @Param() params: { contactUuid: string }): Observable<DeleteResult> {
-      return this.contactService.delete(params.contactUuid);
-    }
+  @Delete(CONTACT_PATH)
+  @HttpCode(200)
+  public deleteContact(@Param() params: { contactUuid: string }): Observable<DeleteResult> {
+    return this.contactService.delete(params.contactUuid);
+  }
 }
 
