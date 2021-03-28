@@ -15,8 +15,14 @@ export class PetService implements BaseEntityService<PetEntity> {
         private readonly petRepository: Repository<PetEntity>,
   ) {}
 
-  create(payload: CreatePetDto): Observable<PetEntity> {
-    return from(this.petRepository.save(payload));
+  create({animaldataRegNumber, birthDate, name, vet, documents}: CreatePetDto): Observable<PetEntity> {
+    return from(this.petRepository.save({
+      animaldataRegNumber,
+      birthDate,
+      name,
+      vet,
+      documents: Promise.resolve(documents)
+    }));
   }
 
   delete(uuid: string): Observable<DeleteResult> {
@@ -32,14 +38,14 @@ export class PetService implements BaseEntityService<PetEntity> {
   }
 
   update(payload: UpdatePetDto): Observable<UpdateResult> {
-    const { name, animaldataRegNumber, birthDate, documents, vet } = payload;
+    const { uuid, name, animaldataRegNumber, birthDate, documents, vet } = payload;
     return from(this.petRepository.createQueryBuilder()
         .update(PetEntity)
         .set({
           name,
           animaldataRegNumber,
           birthDate,
-          documents,
+          documents: Promise.resolve(documents),
           vet
         })
         .where('UUID = :uuid', { uuid })
