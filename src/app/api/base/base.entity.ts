@@ -5,11 +5,13 @@ import { v4 as generateUUID } from 'uuid';
 export class BaseEntity extends AuditEntity {
     @PrimaryColumn({
       name: 'UUID',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
       default: generateUUID(),
     })
     public uuid!: string;
 
-    @Column({ default: true })
+    @Column({
+      name: 'IS_ACTIVE',
+      default: true
+    })
     public isActive?: boolean;
 }

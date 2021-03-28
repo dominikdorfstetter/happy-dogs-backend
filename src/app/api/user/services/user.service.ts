@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { BaseEntityService } from '@app/api/base/base-service.interface';
 import { from, Observable } from 'rxjs';
 import { UserEntity } from '../entities';
+import { CreateUserDto } from '@app/api/user/dtos/create-user.dto';
 
 @Injectable()
 export class UserService implements Partial<BaseEntityService<UserEntity>> {
@@ -13,8 +14,8 @@ export class UserService implements Partial<BaseEntityService<UserEntity>> {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  public create(user: UserEntity): Observable<UserEntity> {
-    return from(this.userRepository.save<UserEntity>(user));
+  public create(user: CreateUserDto): Observable<UserEntity> {
+    return from(this.userRepository.save<CreateUserDto>(user));
   }
 
   public delete(uuid: string): Observable<any> {

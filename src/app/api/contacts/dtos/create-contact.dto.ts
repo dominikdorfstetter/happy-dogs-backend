@@ -7,6 +7,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CreateAddressDto } from '@app/api/contacts/dtos/create-address.dto';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * @author: Dominik Dorfstetter
@@ -14,22 +15,27 @@ import { CreateAddressDto } from '@app/api/contacts/dtos/create-address.dto';
  */
 export class CreateContactDto {
 
-    @IsString()
+    @ApiProperty()
     @IsNotEmpty()
+    @IsString()
     name: string;
 
-    @IsEmail()
+    @ApiPropertyOptional()
     @IsOptional()
+    @IsEmail()
     email: string;
 
-    @IsPhoneNumber()
+    @ApiPropertyOptional()
     @IsOptional()
+    @IsPhoneNumber()
     phone: string;
 
+    @ApiPropertyOptional()
     @IsOptional()
     @IsUrl()
     website: string;
 
+    @ApiPropertyOptional()
     @IsOptional()
     @Type(() => CreateAddressDto)
     address: CreateAddressDto;

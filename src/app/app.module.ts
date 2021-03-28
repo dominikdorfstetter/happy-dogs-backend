@@ -10,12 +10,16 @@ import { LoggerMiddleware } from '@app/middlewares/logger.middleware';
 import { UserEntity } from '@app/api/user/entities';
 import { AppController } from './app.controller';
 import { AppService } from '@app/app.service';
+import { PetEntity } from '@app/api/pets/entities/pet.entity';
+import { ContactEntity } from '@app/api/contacts/entities';
+import { DocumentEntity } from '@app/api/documents/entities/document.entity';
+import { AddressEntity } from '@app/api/contacts/entities/address.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       ...getDefaultConnection(),
-      entities: [UserEntity],
+      entities: [UserEntity, PetEntity, ContactEntity, DocumentEntity, AddressEntity],
     }),
     KeycloakConnectModule.register({
       ...getKeycloakConfig()

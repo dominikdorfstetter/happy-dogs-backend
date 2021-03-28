@@ -1,4 +1,5 @@
-import { IsAlphanumeric, IsISO31661Alpha2, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsAlphanumeric, IsISO31661Alpha2, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
  * @author: Dominik Dorfstetter
@@ -6,28 +7,34 @@ import { IsAlphanumeric, IsISO31661Alpha2, IsNotEmpty, IsOptional, IsString } fr
  */
 export class CreateAddressDto {
 
+    @ApiProperty()
     @IsNotEmpty()
     @IsAlphanumeric()
-    zipCode: string;
+    readonly zipCode: string;
 
+    @ApiProperty()
     @IsNotEmpty()
     @IsString()
-    street: string;
+    readonly street: string;
 
+    @ApiProperty()
     @IsNotEmpty()
     @IsAlphanumeric()
-    houseNumber: string;
+    readonly houseNumber: string;
 
-    @IsOptional()
-    @IsAlphanumeric()
-    floor: string;
-
-    @IsOptional()
-    @IsAlphanumeric()
-    door: string;
-
+    @ApiProperty()
     @IsNotEmpty()
     @IsISO31661Alpha2()
-    countryCode: string;
+    readonly countryCode: string;
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    @IsAlphanumeric()
+    readonly floor: string;
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    @IsAlphanumeric()
+    readonly door: string;
 
 }

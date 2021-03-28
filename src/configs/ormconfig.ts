@@ -9,7 +9,7 @@ dotenv.config();
 
 export const getDefaultConnection = (): ConnectionOptions => ({
   host: process.env.POSTGRES_HOST,
-  port: +process.env.POSTGRES_PORT! || 5432,
+  port: +process.env.POSTGRES_PORT! ?? 5432,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASS,
   database: process.env.POSTGRES_DB,
@@ -17,7 +17,7 @@ export const getDefaultConnection = (): ConnectionOptions => ({
   name: 'default',
   type: 'postgres',
   namingStrategy: typeORMNamingStrategy,
-  synchronize: false,
+  synchronize: true,
   logging: helpers.parseEnvBoolean(process.env.POSTGRES_LOGGING!),
 });
 
